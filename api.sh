@@ -18,6 +18,11 @@ function setup() {
 	echo "alias api='bash $SCRIPT_DIR/api.sh'" >> $HOME/.bashrc
 	source $HOME/.bashrc
 
+	# If pip is not installed, install it
+	if [[ $(which pip) == "" ]] || [[ $(which pip3) == "" ]]; then
+    		curl https://bootstrap.pypa.io/get-pip.py | python
+	fi
+
 	pip install --user -r $SCRIPT_DIR/requirements.txt
 
 }
