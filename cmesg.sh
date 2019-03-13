@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# Documentation
+read -r -d '' DOCUMENTATION <<EOF
+This script runs in a Travis-CI build. It creates a file of commits (authors and messages separated by |) which is then parsed by a python script called mesg_check.py.
+EOF
+
 # Create a hidden commits file for the python script to collect commits
 FILE1=.commits.txt
 
