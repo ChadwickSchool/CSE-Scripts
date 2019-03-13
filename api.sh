@@ -11,7 +11,6 @@ EOF
 
 # Define location globals
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[@]}" )" && pwd )"
-# SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # Add bash command for script and install all required programs
 function setup() {
@@ -19,7 +18,7 @@ function setup() {
 	echo "alias api='bash $SCRIPT_DIR/api.sh'" >> $HOME/.bashrc
 	source $HOME/.bashrc
 
-	sudo pip install --user -r $SCRIPT_DIR/requirements.txt
+	pip install --user -r $SCRIPT_DIR/requirements.txt
 
 }
 
