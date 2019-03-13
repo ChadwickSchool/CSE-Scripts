@@ -20,7 +20,7 @@ function setup() {
 
 	# If pip is not installed, install it
 	if [[ $(which pip) == "" ]] || [[ $(which pip3) == "" ]]; then
-    		curl https://bootstrap.pypa.io/get-pip.py | python
+    		curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py | python get-pip.py --user
 	fi
 
 	pip install --user -r $SCRIPT_DIR/requirements.txt
