@@ -3,9 +3,12 @@
 # Documentation
 '''
 This script parses a file of commits created by cmesg.sh.
-Each commit (author + message) is split at the newline; for each line, the author is checked to see if the author is Mr. DeVaughn-Brown.
-If it is, the commit is ignored; if not, the script checks to see if the message starts with a specific keyword in accordance with the commit format.
-If the commit does not start in that format, the user is prompted and the Travis-CI build from which this script is executed will fail.
+Each commit (author + message) is split at the newline; for each line,
+the author is checked to see if the author is Mr. DeVaughn-Brown.
+If it is, the commit is ignored; if not, the script checks to see if the
+message starts with a specific keyword in accordance with the commit format.
+If the commit does not start in that format, the user is prompted
+and the Travis-CI build from which this script is executed will fail.
 '''
 
 import sys
