@@ -1,9 +1,15 @@
 #!/bin/bash
+
+# Install dependencies
 brew install nuget
 brew cask install mono-mdk
+
+# Install stylecop and log alias to bash profile
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 nuget restore "$SCRIPT_DIR/StyleCop.Baboon"
 msbuild "$SCRIPT_DIR/StyleCop.Baboon/StyleCop.Baboon.sln"
 echo "alias StyleCop='$SCRIPT_DIR/FindViolations'" >> ~/.bash_profile
 source ~/.bash_profile
+
+# Profit!
 echo 'done'
