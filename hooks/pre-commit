@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# Credit to Mr. DeVaughn-Brown
+
 # Check to see if we are on master branch. Stop accidental commits
 if [ $(git symbolic-ref HEAD 2>/dev/null) == "refs/heads/master" ]
 then

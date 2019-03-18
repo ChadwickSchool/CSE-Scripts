@@ -1,30 +1,34 @@
 #!/usr/bin/env python
 
-# T.O.D.O:
-# - expand for travis file so it checks all commit messages (any new commits follow this format)
-
 import sys, os, re
 from subprocess import check_output
 from collections import defaultdict
+
 # Collect the parameters
 commit_msg_filepath = sys.argv[1]
+
 # Figure out which branch we're on
 branch = check_output(['git', 'symbolic-ref', '--short', 'HEAD']).strip()
 print "On branch '%s'" % branch
 
+# Open up the commit message
 with open(commit_msg_filepath, 'r') as f:
     content = f.read()
     lines = content.split("\n")
     is_blank_line = False
+
+    # For each line in the message, check to see if it starts with a commit message starter 
     for i in range(len(lines)):
         current_line = lines[i]
+
+        # If it starts with fix/refactor but doesn't have an explanation, exit with failure
         if current_line.startswith("fix: ") or current_line.startswith("refactor: "):
-            if current_line.startswith("fix: "):
-                print "New fix"
-            elif current_line.startswith("refactor: "):
-                print "New refactor"
-            print("Next Line after fix")
-            print(lines[i+1])
+            # if current_line.startswith("fix: "):
+            #     print "New fix"
+            # elif current_line.startswith("refactor: "):
+            #     print "New refactor"
+            # print("Next Line after fix")
+            # print(lines[i+1])
             if lines[i+1] is "":
                 is_blank_line = True
                 if lines[i+2] is "" or lines[i+2].startswith("#"):
