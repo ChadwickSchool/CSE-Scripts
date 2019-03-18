@@ -12,11 +12,17 @@ EOF
 # Define location globals
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[@]}" )" && pwd )"
 
-# Add bash command for script and install all required programs
+# Add bash command for script and install all required programs and git hooks
 function setup() {
 
 	echo "alias api='bash $SCRIPT_DIR/api.sh'" >> $HOME/.bashrc
 	source $HOME/.bashrc
+
+    cp hooks/pre-commit .git/hooks
+    chmod -x .git/hooks/pre-commit
+
+    cp hooks/commit-msg .git/hooks
+    chmod -x .git/hooks/commit-msg
 
 	# If pip is not installed, install it
 	if [[ $(which pip) == "" ]] || [[ $(which pip3) == "" ]]; then
