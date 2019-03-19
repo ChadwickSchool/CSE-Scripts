@@ -52,6 +52,7 @@ with open('.commits.txt', 'r') as f:
                     or message.startswith("chore: ")
                     or message.startswith("Merge ")
                         or message.startswith("Initial ")
+                        or message.startswith("Update ")
                         or message.startswith("Associate ")):
                     pass
                 else:
