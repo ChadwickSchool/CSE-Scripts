@@ -6,3 +6,5 @@ USAGE:
   Should export xml file in StyleCop folder.
 
   Settings located in StyleCop.Baboon/Settings.StyleCop
+
+## EXPLAIN WHAT'S GOING ON
