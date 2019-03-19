@@ -6,9 +6,13 @@ The major scripts in this directory are ```api.sh``` and ```cmesg.sh```, which i
 
 ## Script Usages
 #### _API_
-``` Usage: api [OPERATION]
-Operation: app   - Set up application using test database
-                   db    - Set up a populated database
-                   setup - Install programs and add api alias to bashrc
-                   test  - Run unit tests on application
 ```
+    Utility for efficiently setting up environments, unit tests, and populated databases.
+
+    Usage:
+      $CMD setup - Install programs and add api alias to bashrc
+      $CMD db - Set up a populated database
+      $CMD test - Run unit tests on application
+```
+
+In order to install dependencies having just recently downloaded the script, run ```bash api.sh setup```, and that will install dependencies, hooks, and aliases.

@@ -2,11 +2,13 @@
 
 # Documentation
 read -r -d '' DOCUMENTATION <<EOF
-Usage: api [OPERATION]
-Operation: app   - Set up application using test database
-		   db    - Set up a populated database
-		   setup - Install programs and add api alias to bashrc
-		   test  - Run unit tests on application
+Utility for efficiently setting up environments, unit tests, and populated databases.
+
+Usage:
+  $CMD setup - Install programs and add api alias to bashrc
+  $CMD db - Set up a populated database
+  $CMD test - Run unit tests on application
+
 EOF
 
 # Define location globals
