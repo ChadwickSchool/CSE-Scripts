@@ -35,4 +35,4 @@ matrix:
         - "./pycodestyle-travis/install.sh"
       script:
         - "./pycodestyle-travis/scan.sh"
-        - bash project/scripts/cmesg/cmesg.sh
+        - bash cmesg.sh
