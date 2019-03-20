@@ -1,0 +1,11 @@
+#!/bin/bash
+scoop install nuget
+#scoop install mono
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+nuget restore "$SCRIPT_DIR/StyleCop.Baboon"
+cd "C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\MSBuild\15.0\Bin"
+cmd msbuild "$SCRIPT_DIR/StyleCop.Baboon/StyleCop.Baboon.sln"
+echo "alias StyleCop='$SCRIPT_DIR/FindViolationsWin'" >> ~/.bash_profile
+echo 'done'
+exit
+exit

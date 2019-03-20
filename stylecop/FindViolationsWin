@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# install and setup nuget
+# build stylecop solution
+# check if there's a .bash_profile in the home directory
+# if there's not one create one
+# add alias to run the stylecop (I would call it styleCop instead of findViolations)
+
+
+FIRST_ARGUMENT="$1"
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+if [[ -d $FIRST_ARGUMENT ]]; then
+	for FILE in $(find $FIRST_ARGUMENT -type f -name "*.cs");
+	do
+		Mono $SCRIPT_DIR/StyleCop.Baboon/StyleCop.Baboon/bin/Debug/StyleCop.Baboon.exe $SCRIPT_DIR/StyleCop.Baboon/Settings.StyleCop $FILE $SCRIPT_DIR/nothing
+		NewName=$(basename $FILE)
+		NewName=${NewName%".cs"}_
+		SCV="StyleCopViolations.xml"
+		NewName=$NewName$SCV
+		mv StyleCopViolations.xml $NewName
+		mv $NewName $SCRIPT_DIR
+	done
+else
+	Mono $SCRIPT_DIR/StyleCop.Baboon/StyleCop.Baboon/bin/Debug/StyleCop.Baboon.exe $SCRIPT_DIR/StyleCop.Baboon/Settings.StyleCop $FIRST_ARGUMENT $SCRIPT_DIR/nothing
+	mv StyleCopViolations.xml $SCRIPT_DIR
+fi
