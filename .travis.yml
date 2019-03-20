@@ -1,38 +1,54 @@
+# Enable automatic root permission
 sudo: required
 
+# Install Google Chrome so npm linting and tests work
 addons:
     chrome: stable
 
 matrix:
   include:
-    # - language: node_js
-    #   before_install:
-    #     - npm install -g @angular/cli
-    #     - npm install @angular-devkit/build-angular
-    #     - npm install @angular/compiler-cli
-    #     - npm install @angular/compiler
-    #     - npm install karma
-    #     - npm install tslint
-    #   node_js:
-    #     - "8"
-    #   script:
-    #     - cd frontend
-    #     - npm install
-    #     - ng lint
-    #     - npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
-    #     - cd ..
+
+      # JAVASCRIPT SETTINGS
+    - language: node_js
+
+      # Install Angular dependencies
+      before_install:
+        - npm install -g @angular/cli
+        - npm install @angular-devkit/build-angular
+        - npm install @angular/compiler-cli
+        - npm install @angular/compiler
+        - npm install karma
+        - npm install tslint
+      node_js:
+        - "8"
+      
+      # Run npm install, lint and test code in frontend branch
+      script:
+        - cd frontend
+        - npm install
+        - ng lint
+        - npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
+        - cd ..
+
+      # PYTHON SETTINGS
     - language: python
       python: 2.7.12
       os: linux
-      env: SKIP_INTERPRETER=true
+      env: SKIP_INTERPRETER=true # NEEDS TO KEEP BECAUSE OTHERWISE THE scan.sh FILE WON'T RUN AND TRAVIS-CI WILL FAIL
+
+      # Upgrade pip and install Flask dependencies
       before_install:
         - pip install --upgrade setuptools
         - git clone https://github.com/TravisToolbox/pycodestyle-travis.git
         - pip install --upgrade pip
         - pip install flask packaging oauth2client redis passlib flask-httpauth
         - pip install sqlalchemy flask-sqlalchemy psycopg2-binary bleach requests
+      
+      # Allow pycodestyle-travis repository to install its own requirements
       install:
         - "./pycodestyle-travis/install.sh"
+      
+      # Run pycodestyle on all scripts and run the global commit checker
       script:
         - "./pycodestyle-travis/scan.sh"
         - bash cmesg.sh
