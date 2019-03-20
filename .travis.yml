@@ -1,4 +1,4 @@
-# Enable automatic root permission
+# Enable root permissions
 sudo: required
 
 # Install Google Chrome so npm linting and tests work
@@ -8,27 +8,27 @@ addons:
 matrix:
   include:
 
-      # JAVASCRIPT SETTINGS
-    - language: node_js
-
-      # Install Angular dependencies
-      before_install:
-        - npm install -g @angular/cli
-        - npm install @angular-devkit/build-angular
-        - npm install @angular/compiler-cli
-        - npm install @angular/compiler
-        - npm install karma
-        - npm install tslint
-      node_js:
-        - "8"
-      
-      # Run npm install, lint and test code in frontend branch
-      script:
-        - cd frontend
-        - npm install
-        - ng lint
-        - npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
-        - cd ..
+      # JAVASCRIPT SETTINGS (ONLY WORKS WHEN ANGULAR PROJECT PRESENT; UNCOMMENT TO TEST ANGULAR PROJECTS)
+    # - language: node_js
+    #
+    #   # Install Angular dependencies
+    #   before_install:
+    #     - npm install -g @angular/cli
+    #     - npm install @angular-devkit/build-angular
+    #     - npm install @angular/compiler-cli
+    #     - npm install @angular/compiler
+    #     - npm install karma
+    #     - npm install tslint
+    #   node_js:
+    #     - "8"
+    #
+    #   # Run npm install, lint and test code in frontend branch
+    #   script:
+    #     - cd frontend
+    #     - npm install
+    #     - ng lint
+    #     - npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
+    #     - cd ..
 
       # PYTHON SETTINGS
     - language: python
@@ -43,11 +43,11 @@ matrix:
         - pip install --upgrade pip
         - pip install flask packaging oauth2client redis passlib flask-httpauth
         - pip install sqlalchemy flask-sqlalchemy psycopg2-binary bleach requests
-      
+
       # Allow pycodestyle-travis repository to install its own requirements
       install:
         - "./pycodestyle-travis/install.sh"
-      
+
       # Run pycodestyle on all scripts and run the global commit checker
       script:
         - "./pycodestyle-travis/scan.sh"
