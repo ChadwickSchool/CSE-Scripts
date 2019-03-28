@@ -17,7 +17,7 @@ with open(commit_msg_filepath, 'r') as f:
     lines = content.split("\n")
     is_blank_line = False
 
-    # For each line in the message, check to see if it starts with a commit message starter 
+    # For each line in the message, check to see if it starts with a commit message starter
     for i in range(len(lines)):
         current_line = lines[i]
 
