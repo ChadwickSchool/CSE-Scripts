@@ -3,9 +3,9 @@
 # Check if Homebrew is installed
 brew help
 if [[ $? != 0 ]]; then
-    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+	/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 else
-    brew update
+	brew update
 fi
 
 # Install dependencies
@@ -13,10 +13,10 @@ brew install nuget
 brew cask install mono-mdk
 
 # Install stylecop and log alias to bash profile
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 nuget restore "$SCRIPT_DIR/StyleCop.Baboon"
 msbuild "$SCRIPT_DIR/StyleCop.Baboon/StyleCop.Baboon.sln"
-echo "alias StyleCop='$SCRIPT_DIR/FindViolations'" >> ~/.bash_profile
+echo "alias StyleCop='$SCRIPT_DIR/FindViolations'" >>~/.bash_profile
 source ~/.bash_profile
 
 # Profit!
