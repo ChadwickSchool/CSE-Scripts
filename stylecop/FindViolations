@@ -1,22 +1,21 @@
 #!/bin/bash
 
 ITEM_TO_CHECK="$1"
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # If ITEM_TO_CHECK is a directory, then check each C# file in the directory; if it's a singular file, then check it
 # In either case, move the file to the directory where the script is located (??)
 if [[ -d $ITEM_TO_CHECK ]]; then
-	for FILE in $(find $ITEM_TO_CHECK -type f -name "*.cs");
-	do
-		Mono $SCRIPT_DIR/StyleCop.Baboon/StyleCop.Baboon/bin/Debug/StyleCop.Baboon.exe $SCRIPT_DIR/StyleCop.Baboon/Settings.StyleCop $FILE $SCRIPT_DIR/nothing
-		NewName=$(basename $FILE)
+	for FILE in $(find $ITEM_TO_CHECK -type f -name "*.cs"); do
+		Mono "$SCRIPT_DIR"/StyleCop.Baboon/StyleCop.Baboon/bin/Debug/StyleCop.Baboon.exe "$SCRIPT_DIR"/StyleCop.Baboon/Settings.StyleCop "$FILE" "$SCRIPT_DIR"/nothing
+		NewName=$(basename "$FILE")
 		NewName=${NewName%".cs"}_
 		SCV="StyleCopViolations.xml"
 		NewName=$NewName$SCV
-		mv StyleCopViolations.xml $NewName
-		mv $NewName $SCRIPT_DIR
+		mv StyleCopViolations.xml "$NewName"
+		mv "$NewName" "$SCRIPT_DIR"
 	done
 else
-	Mono $SCRIPT_DIR/StyleCop.Baboon/StyleCop.Baboon/bin/Debug/StyleCop.Baboon.exe $SCRIPT_DIR/StyleCop.Baboon/Settings.StyleCop $ITEM_TO_CHECK $SCRIPT_DIR/nothing
-	mv StyleCopViolations.xml $SCRIPT_DIR
+	Mono "$SCRIPT_DIR"/StyleCop.Baboon/StyleCop.Baboon/bin/Debug/StyleCop.Baboon.exe "$SCRIPT_DIR"/StyleCop.Baboon/Settings.StyleCop "$ITEM_TO_CHECK" "$SCRIPT_DIR"/nothing
+	mv StyleCopViolations.xml "$SCRIPT_DIR"
 fi
