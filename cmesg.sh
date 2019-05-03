@@ -10,11 +10,11 @@ FILE1=.commits.txt
 
 # If hidden commits file still exists, then remove it
 if [[ -e $FILE1 ]]; then
-    rm $FILE1
+	rm $FILE1
 fi
 
 # Retrieve all commits and export them to the hidden file
-git log --pretty=format:"%an|%s" > $FILE1
+git log --pretty=format:"%an|%s" >$FILE1
 
 # Run the commit message python script
 python mesg_check.py
